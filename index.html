@@ -2,8 +2,8 @@
 <head>
 <title>PhoneGap Showcase</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="jquery.mobile-1.0.min.css" type="text/css" media="all">
-<link rel="stylesheet" href="jquery.mobile.structure-1.0.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" type="text/css" media="all">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile.structure-1.0.min.css" type="text/css" media="all">
 </head>
 <body>
      <div data-role="page">
@@ -18,9 +18,9 @@
           </div>
      </div>
 </body>
-<script type="text/javascript" charset="utf-8" src="jquery-1.7.1.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="jquery.mobile-1.0.min.js"></script>
-<script type="text/javascript" charset="utf-8" src="phonegap-1.2.0.js"></script>
+<script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
 <script type="text/javascript">
 $(function(){
      document.addEventListener("deviceready",
@@ -38,16 +38,16 @@ function getCameraBase64(){
                // cameraSuccess
                $('#camera_pic')
                    .css('display', 'block')
-                   .attr('src', 'data:image/jpeg;base64,' + imageData);
+                   .attr('src', 'data:image/jpeg;base64,' + imageData); // 引数で渡されたBase64形式の画像を表示
           },
           function(message){
                // cameraError
-               alert(message);
+               alert(message); // コンテンツを取得できなかった場合のメッセージを表示
           },
           {
                quality : 75,
-               destinationType : Camera.DestinationType.DATA_URL,
-               sourceType : Camera.PictureSourceType.CAMERA,
+               destinationType : Camera.DestinationType.DATA_URL, //取得した画像をBase64形式の文字列で取得する
+               sourceType : Camera.PictureSourceType.CAMERA, // 画像はカメラから取得する
           });
 };
 // カメラから画像を取得して、保存された画像のURIを取得する
@@ -57,16 +57,16 @@ function getCameraURI(){
             // cameraSuccess
             $('#camera_pic')
                  .css('display', 'block')
-                 .attr('src', imageURI);
+                 .attr('src', imageURI); // 取得した画像のURIを指定して画像を表示
         },
         function(message){
             // cameraError
-            alert(message);
+            alert(message); // コンテンツを取得できなかった場合のメッセージを表示
         },
         {
             quality : 75,
-            destinationType : Camera.DestinationType.FILE_URI,
-            sourceType : Camera.PictureSourceType.CAMERA,
+            destinationType : Camera.DestinationType.FILE_URI, //取得した画像のURIを取得する
+            sourceType : Camera.PictureSourceType.CAMERA, // 画像はカメラから取得する
         });
 };
 // ギャラリーなどから選択した画像のURIを取得する
@@ -76,16 +76,16 @@ function getPhotoURI(){
             // cameraSuccess
             $('#camera_pic')
                  .css('display', 'block')
-                 .attr('src', imageURI);
+                 .attr('src', imageURI); // 取得した画像のURIを指定して画像を表示
         },
         function(message){
             // cameraError
-            alert(message);
+            alert(message); // コンテンツを取得できなかった場合のメッセージを表示
         },
         {
             quality : 75,
-            destinationType : Camera.DestinationType.FILE_URI,
-            sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+            destinationType : Camera.DestinationType.FILE_URI, //選択した画像のURIを取得する
+            sourceType : Camera.PictureSourceType.PHOTOLIBRARY, //コンテンツを選択して取得
         });
 };
 </script>

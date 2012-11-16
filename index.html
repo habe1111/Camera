@@ -1,103 +1,103 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Capture Photo</title>
+    <title>写真を撮ってみよう</title>
 
     <script type="text/javascript" charset="utf-8" src="cordova-2.2.0.js"></script>
     <script type="text/javascript" charset="utf-8">
 
-    var pictureSource;   // picture source
-    var destinationType; // sets the format of returned value 
+    var pictureSource;   // 写真ソース
+    var destinationType; // 戻り値のフォーマット
 
-    // Wait for Cordova to connect with the device
+    // Cordova がデバイスと接続するまで待機
     //
     document.addEventListener("deviceready",onDeviceReady,false);
 
-    // Cordova is ready to be used!
+    // Cordova 準備完了
     //
     function onDeviceReady() {
         pictureSource=navigator.camera.PictureSourceType;
         destinationType=navigator.camera.DestinationType;
     }
 
-    // Called when a photo is successfully retrieved
+    // 写真の撮影に成功した場合 (URI 形式)
     //
     function onPhotoDataSuccess(imageData) {
-      // Uncomment to view the base64 encoded image data
+      // 下記のコメントを外すことで Base64 形式のデータをログに出力
       // console.log(imageData);
 
-      // Get image handle
+      // 画像ハンドルを取得
       //
       var smallImage = document.getElementById('smallImage');
 
-      // Unhide image elements
+      // 画像要素を表示
       //
       smallImage.style.display = 'block';
 
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
+      // 取得した写真を表示
+      // 画像のリサイズにインライン CSS を使用
       //
       smallImage.src = "data:image/jpeg;base64," + imageData;
     }
 
-    // Called when a photo is successfully retrieved
+    // 写真の撮影に成功した場合 (URI  形式)
     //
     function onPhotoURISuccess(imageURI) {
-      // Uncomment to view the image file URI 
+      // 下記のコメントを外すことでファイル URI をログに出力
       // console.log(imageURI);
 
-      // Get image handle
+      // 画像ハンドルを取得
       //
       var largeImage = document.getElementById('largeImage');
 
-      // Unhide image elements
+      // 画像要素を表示
       //
       largeImage.style.display = 'block';
 
-      // Show the captured photo
-      // The inline CSS rules are used to resize the image
+      // 取得した写真を表示
+      // 画像のリサイズにインライン CSS を使
       //
       largeImage.src = imageURI;
     }
 
-    // A button will call this function
+    // ボタンがクリックされた場合の処理
     //
     function capturePhoto() {
-      // Take picture using device camera and retrieve image as base64-encoded string
+      // 編集が許可された写真を撮影し、 Base64 形式のイメージとして取得する場合
       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
         destinationType: destinationType.DATA_URL });
     }
 
-    // A button will call this function
+    // ボタンがクリックされた場合の処理
     //
     function capturePhotoEdit() {
-      // Take picture using device camera, allow edit, and retrieve image as base64-encoded string  
+      // 編集が許可された写真を撮影し、 Base64 形式のイメージとして取得する場合
       navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 20, allowEdit: true,
         destinationType: destinationType.DATA_URL });
     }
 
-    // A button will call this function
+    // ボタンがクリックされた場合の処理
     //
     function getPhoto(source) {
-      // Retrieve image file location from specified source
-      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50, 
+      // 写真をファイル URI として取得する場合
+      navigator.camera.getPicture(onPhotoURISuccess, onFail, { quality: 50,
         destinationType: destinationType.FILE_URI,
         sourceType: source });
     }
 
-    // Called if something bad happens.
-    // 
+    // エラー発生時の処理
+    //
     function onFail(message) {
-      alert('Failed because: ' + message);
+      alert('エラーが発生しました: ' + message);
     }
 
     </script>
   </head>
   <body>
-    <button onclick="capturePhoto();">Capture Photo</button> <br>
-    <button onclick="capturePhotoEdit();">Capture Editable Photo</button> <br>
-    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">From Photo Library</button><br>
-    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">From Photo Album</button><br>
+    <button onclick="capturePhoto();">写真を撮影</button> <br>
+    <button onclick="capturePhotoEdit();">写真を撮影して編集</button> <br>
+    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">フォトライブラリから取得</button><br>
+    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">フォトアルバムから取得</button><br>
     <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
     <img style="display:none;" id="largeImage" src="" />
   </body>

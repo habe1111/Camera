@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8">
     <title>写真を撮ってみよう</title>
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.1.0/jquery.mobile-1.1.0.min.js"></script>
+
     <script type="text/javascript" charset="utf-8" src="cordova-2.0.0.js"></script>
     <script type="text/javascript" charset="utf-8">
 
@@ -94,11 +98,19 @@
     </script>
   </head>
   <body>
-    <button onclick="capturePhoto();">写真を撮影</button> <br>
-    <button onclick="capturePhotoEdit();">写真を撮影して編集</button> <br>
-    <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">フォトライブラリから取得</button><br>
-    <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">フォトアルバムから取得</button><br>
-    <img style="display:none;width:60px;height:60px;" id="smallImage" src="" />
-    <img style="display:none;" id="largeImage" src="" />
+    <div data-role="page">
+
+	  <div data-role="header">
+		<h1>カメラアプリ</h1>
+	  </div><!-- /header -->
+
+	  <div data-role="content">	
+        <button onclick="capturePhoto();">写真を撮影</button> <br>
+        <button onclick="capturePhotoEdit();">写真を撮影して編集</button> <br>
+        <button onclick="getPhoto(pictureSource.PHOTOLIBRARY);">フォトライブラリから取得</button><br>
+        <button onclick="getPhoto(pictureSource.SAVEDPHOTOALBUM);">フォトアルバムから取得</button><br>
+	  </div><!-- /content -->
+
+    </div><!-- /page -->
   </body>
 </html>
